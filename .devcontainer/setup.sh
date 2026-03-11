@@ -4,6 +4,9 @@ touch /cmdhistory/.bash_history
 ln -sf /cmdhistory/.bash_history ~/.bash_history
 echo 'export PROMPT_COMMAND="history -a;${PROMPT_COMMAND}"' >> ~/.bashrc
 
+# Persist GitHub CLI auth across rebuilds
+sudo chown -R $(whoami):$(whoami) /home/vscode/.config/gh
+
 # Persist Claude Code settings and memory across rebuilds
 sudo chown -R $(whoami):$(whoami) /claude-persist
 mkdir -p /claude-persist/.claude
