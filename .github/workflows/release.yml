@@ -59,6 +59,8 @@ jobs:
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
       - name: Build frontend and cross-compile binaries
         run: make multiarch
