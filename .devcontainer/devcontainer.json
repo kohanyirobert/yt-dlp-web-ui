@@ -18,6 +18,11 @@
             "source": "devcontainer-claude-code",
             "target": "/claude-persist",
             "type": "volume"
+        },
+        {
+            "source": "devcontainer-gh-cli",
+            "target": "/home/vscode/.config/gh",
+            "type": "volume"
         }
     ],
     "postCreateCommand": "bash .devcontainer/setup.sh",
