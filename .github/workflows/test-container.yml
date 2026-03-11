@@ -3,6 +3,14 @@ name: Docker Image CI
 on:
   pull_request:
     branches: [ "main" ]
+    paths:
+      - "main.go"
+      - "go.mod"
+      - "go.sum"
+      - "server/**"
+      - "frontend/**"
+      - "Makefile"
+      - "Dockerfile"
 
 jobs:
 

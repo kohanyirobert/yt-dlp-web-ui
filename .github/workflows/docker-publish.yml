@@ -4,6 +4,14 @@ on:
     types: [published]
   push:
     branches: [ main ]
+    paths:
+      - "main.go"
+      - "go.mod"
+      - "go.sum"
+      - "server/**"
+      - "frontend/**"
+      - "Makefile"
+      - "Dockerfile"
 
 jobs:
   publish:
