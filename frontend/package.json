@@ -4,7 +4,8 @@
   "description": "Frontend compontent of yt-dlp-webui",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build"
+    "build": "vite build",
+    "e2e": "playwright test"
   },
   "type": "module",
   "author": "marcopiovanello",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@modyfi/vite-plugin-yaml": "^1.1.0",
+    "@playwright/test": "^1.58.2",
     "@types/node": "^20.14.2",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
