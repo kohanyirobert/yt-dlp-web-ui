@@ -10,7 +10,7 @@ node_modules
 downloads
 .DS_Store
 build/
-yt-dlp-webui
+yt-dlp-web-ui
 session.dat
 config.yml
 cookies.txt

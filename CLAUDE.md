@@ -31,8 +31,8 @@ cd /workspaces/yt-dlp-web-ui/frontend && pnpm install && pnpm dev  # http://loca
 ### Backend (Go)
 ```bash
 go run main.go                          # Run server (dev)
-go build -o yt-dlp-webui main.go        # Build binary
-CGO_ENABLED=0 go build -o yt-dlp-webui main.go  # Static binary
+go build -o yt-dlp-web-ui main.go        # Build binary
+CGO_ENABLED=0 go build -o yt-dlp-web-ui main.go  # Static binary
 go test ./...                           # Run all tests
 go test ./server/rpc/...                # Run tests in a specific package
 ```
