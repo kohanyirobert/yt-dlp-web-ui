@@ -1,0 +1,72 @@
+name: Release Linux Binaries
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compute version tag
+        id: version
+        run: |
+          BASE="v$(date -u +%Y.%m.%d)"
+          git fetch --tags
+          # Find existing tags for today
+          EXISTING=$(git tag -l "${BASE}*" | sort -V)
+          if [ -z "$EXISTING" ]; then
+            TAG="$BASE"
+          elif ! echo "$EXISTING" | grep -qx "$BASE"; then
+            TAG="$BASE"
+          else
+            # Find the highest suffix
+            MAX_SUFFIX=1
+            for t in $EXISTING; do
+              SUFFIX="${t#${BASE}.}"
+              if [ "$SUFFIX" != "$t" ] && [ "$SUFFIX" -eq "$SUFFIX" ] 2>/dev/null; then
+                if [ "$SUFFIX" -ge "$MAX_SUFFIX" ]; then
+                  MAX_SUFFIX=$((SUFFIX + 1))
+                fi
+              fi
+            done
+            # If only the base tag exists, next is .2
+            if [ "$MAX_SUFFIX" -eq 1 ]; then
+              MAX_SUFFIX=2
+            fi
+            TAG="${BASE}.${MAX_SUFFIX}"
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Computed tag: $TAG"
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Build frontend and cross-compile binaries
+        run: make multiarch
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: ${{ steps.version.outputs.tag }}
+          generate_release_notes: true
+          files: build/*
