@@ -12,6 +12,22 @@ yt-dlp-web-ui is a full-stack self-hosted web application that provides a browse
 
 ## Commands
 
+### Starting the full app (embedded frontend)
+The Go binary embeds the frontend, so the frontend must be built first:
+```bash
+cd frontend && pnpm install && pnpm build   # Build frontend into frontend/dist/
+cd /workspaces/yt-dlp-web-ui && go run main.go -port 3033  # Serves UI + API at http://localhost:3033
+```
+
+### Starting frontend + backend separately (hot reload)
+```bash
+# Terminal 1: backend
+cd /workspaces/yt-dlp-web-ui && go run main.go -port 3033
+
+# Terminal 2: frontend dev server with hot reload
+cd /workspaces/yt-dlp-web-ui/frontend && pnpm install && pnpm dev  # http://localhost:5173
+```
+
 ### Backend (Go)
 ```bash
 go run main.go                          # Run server (dev)
