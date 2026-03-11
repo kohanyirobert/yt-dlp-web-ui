@@ -86,7 +86,6 @@ The Go server uses [chi](https://github.com/go-chi/chi) for routing and serves b
 - `/twitch` — Twitch livestream monitor
 - `/log` — Server-sent events log stream
 - `/status` — Server status info
-- `/openapi` — Swagger UI
 
 **Core services** (all singletons, initialized in `server/server.go:RunBlocking`):
 - `MemoryDB` — In-memory map of UUID → active download process; serialized to `session.dat` (gob) every 5 minutes for restart recovery
@@ -136,10 +135,9 @@ React 19 + TypeScript + Vite 6. UI components from MUI v6.
 - REST (`/api/v1`) for CRUD on subscriptions, archive, settings
 - Auth token stored in state/localStorage and sent as header
 
-### Proto / OpenAPI
+### Proto
 
 - `/proto` — Protobuf definitions (currently informational, not compiled into the build)
-- `/openapi` — OpenAPI 3.x spec served via Swagger UI at `/openapi`
 
 ## Git & GitHub Workflow
 

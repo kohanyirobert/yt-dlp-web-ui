@@ -39,8 +39,6 @@ var (
 	//go:embed frontend/dist/assets/*
 	frontend embed.FS
 
-	//go:embed openapi/*
-	swagger embed.FS
 )
 
 func init() {
@@ -111,7 +109,6 @@ func main() {
 	openid.Configure()
 
 	server.RunBlocking(&server.RunConfig{
-		App:     frontend,
-		Swagger: swagger,
+		App: frontend,
 	})
 }

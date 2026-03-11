@@ -41,13 +41,11 @@ import (
 )
 
 type RunConfig struct {
-	App     fs.FS
-	Swagger fs.FS
+	App fs.FS
 }
 
 type serverConfig struct {
 	frontend fs.FS
-	swagger  fs.FS
 	mdb      *internal.MemoryDB
 	db       *sql.DB
 	mq       *internal.MessageQueue
@@ -132,7 +130,6 @@ func RunBlocking(rc *RunConfig) {
 
 	scfg := serverConfig{
 		frontend: rc.App,
-		swagger:  rc.Swagger,
 		mdb:      mdb,
 		mq:       mq,
 		db:       db,
@@ -201,8 +198,6 @@ func newServer(c serverConfig) *http.Server {
 	baseUrl := config.Instance().BaseURL
 	r.Mount(baseUrl+"/", http.StripPrefix(baseUrl, http.FileServerFS(c.frontend)))
 
-	// swagger
-	r.Mount("/openapi", http.FileServerFS(c.swagger))
 
 	// Filebrowser routes
 	r.Route("/filebrowser", func(r chi.Router) {
