@@ -30,6 +30,7 @@
         "EDITOR": "code",
         "VISUAL": "code",
         "ANTHROPIC_BASE_URL": "${localEnv:ANTHROPIC_BASE_URL}",
-        "ANTHROPIC_AUTH_TOKEN": "${localEnv:ANTHROPIC_AUTH_TOKEN}"
+        "ANTHROPIC_AUTH_TOKEN": "${localEnv:ANTHROPIC_AUTH_TOKEN}",
+        "DISABLE_AUTOUPDATER": "1" // Disable's Claude Code's auto updater, cannot auto update due to using devcontainer feature
     }
 }
