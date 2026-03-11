@@ -142,7 +142,7 @@ React 19 + TypeScript + Vite 6. UI components from MUI v6.
 ## Git & GitHub Workflow
 
 - Default branch is `main`. Always work on a **feature branch** and open a PR. Linear project history is required (squash or rebase merge only).
-- **Always ask the user before merging a PR** so they can review it on GitHub first.
+- After opening a PR, wait for checks to pass then merge without asking.
 - CI workflows (`release.yml`, `docker-publish.yml`, `test-container.yml`) use `paths` whitelists — only app source changes (`main.go`, `go.*`, `server/**`, `frontend/**`, `Makefile`, `Dockerfile`) trigger builds/releases.
 
 ## Key File Locations
