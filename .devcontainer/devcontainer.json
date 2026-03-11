@@ -22,6 +22,8 @@
     ],
     "postCreateCommand": "bash .devcontainer/setup.sh",
     "remoteEnv": {
+        "EDITOR": "code",
+        "VISUAL": "code",
         "ANTHROPIC_BASE_URL": "${localEnv:ANTHROPIC_BASE_URL}",
         "ANTHROPIC_AUTH_TOKEN": "${localEnv:ANTHROPIC_AUTH_TOKEN}"
     }
