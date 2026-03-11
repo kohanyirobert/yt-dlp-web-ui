@@ -141,6 +141,12 @@ React 19 + TypeScript + Vite 6. UI components from MUI v6.
 - `/proto` — Protobuf definitions (currently informational, not compiled into the build)
 - `/openapi` — OpenAPI 3.x spec served via Swagger UI at `/openapi`
 
+## Git & GitHub Workflow
+
+- Default branch is `main`. Always work on a **feature branch** and open a PR. Linear project history is required (squash or rebase merge only).
+- **Always ask the user before merging a PR** so they can review it on GitHub first.
+- CI workflows (`release.yml`, `docker-publish.yml`, `test-container.yml`) use `paths` whitelists — only app source changes (`main.go`, `go.*`, `server/**`, `frontend/**`, `Makefile`, `Dockerfile`) trigger builds/releases.
+
 ## Key File Locations
 
 | Purpose | Path |
