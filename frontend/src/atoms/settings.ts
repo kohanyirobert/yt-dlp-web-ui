@@ -65,7 +65,7 @@ export const serverAddressState = atomWithStorage<string>(
 
 export const serverPortState = atomWithStorage<number>(
   'server-port',
-  Number(localStorage.getItem('server-port')) || Number(window.location.port)
+  Number(localStorage.getItem('server-port')) || Number(import.meta.env.VITE_API_PORT) || Number(window.location.port)
 )
 
 export const latestCliArgumentsState = atomWithStorage<string>(

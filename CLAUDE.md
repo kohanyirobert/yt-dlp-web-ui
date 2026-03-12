@@ -28,6 +28,8 @@ cd /workspaces/yt-dlp-web-ui && go run main.go -port 3033
 cd /workspaces/yt-dlp-web-ui/frontend && pnpm install && pnpm dev  # http://localhost:5173
 ```
 
+**Important:** The frontend defaults its API target to `window.location` (i.e. `localhost:5173` in dev). You must point it to the backend port: open Settings (`#/settings`) and set **Server Port** to `3033`, or run `localStorage.setItem('server-port', '3033')` in the browser console and reload.
+
 ### Backend (Go)
 ```bash
 go run main.go                          # Run server (dev)
