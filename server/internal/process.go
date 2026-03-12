@@ -62,17 +62,23 @@ type Process struct {
 // Resembles a JSON Object in order to Unmarshal it later.
 // This approach is anyhow not perfect: quotes are not escaped properly.
 // Each process is not identified by its PID but by a UUIDv4
-func (p *Process) Start() {
-	// escape bash variable escaping and command piping, you'll never know
-	// what they might come with...
-	p.Params = slices.DeleteFunc(p.Params, func(e string) bool {
+// sanitizeParams filters out dangerous shell patterns (${...}, &&) and empty
+// strings from user-supplied yt-dlp parameters.
+func sanitizeParams(params []string) []string {
+	params = slices.DeleteFunc(params, func(e string) bool {
 		match, _ := regexp.MatchString(`(\$\{)|(\&\&)`, e)
 		return match
 	})
 
-	p.Params = slices.DeleteFunc(p.Params, func(e string) bool {
+	params = slices.DeleteFunc(params, func(e string) bool {
 		return e == ""
 	})
+
+	return params
+}
+
+func (p *Process) Start() {
+	p.Params = sanitizeParams(p.Params)
 
 	out := DownloadOutput{
 		Path:     config.Instance().DownloadPath,

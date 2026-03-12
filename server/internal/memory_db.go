@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"context"
 	"encoding/gob"
 	"errors"
 	"log/slog"
@@ -148,11 +149,16 @@ func (m *MemoryDB) Restore(mq *MessageQueue) {
 	}
 }
 
-func (m *MemoryDB) EventListener() {
-	for p := range memDbEvents {
-		if p.AutoRemove {
-			slog.Info("compacting MemoryDB", slog.String("id", p.Id))
-			m.Delete(p.Id)
+func (m *MemoryDB) EventListener(ctx context.Context) {
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		case p := <-memDbEvents:
+			if p.AutoRemove {
+				slog.Info("compacting MemoryDB", slog.String("id", p.Id))
+				m.Delete(p.Id)
+			}
 		}
 	}
 }

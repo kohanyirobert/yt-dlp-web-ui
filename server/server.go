@@ -109,7 +109,7 @@ func RunBlocking(rc *RunConfig) {
 	}
 	mq.SetupConsumers()
 	go mdb.Restore(mq)
-	go mdb.EventListener()
+	go mdb.EventListener(context.Background())
 
 	lm := livestream.NewMonitor(mq, mdb)
 	go lm.Schedule()
