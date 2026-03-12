@@ -27,3 +27,4 @@ livestreams.dat
 archive.txt
 twitch-monitor.dat
 frontend/test-results/
+.vscode/
