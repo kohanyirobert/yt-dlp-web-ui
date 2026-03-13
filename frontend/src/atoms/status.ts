@@ -9,13 +9,6 @@ import { atom } from 'jotai'
 
 export const connectedState = atom(false)
 
-export const freeSpaceBytesState = atom(async (get) => {
-  const res = await get(rpcClientState)
-    .freeSpace()
-    .catch(() => ({ result: 0 }))
-  return res.result
-})
-
 export const availableDownloadPathsState = atom(async (get) => {
   const res = await get(rpcClientState).directoryTree()
     .catch(() => ({ result: [] }))

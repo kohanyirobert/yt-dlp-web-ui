@@ -150,13 +150,6 @@ export class RPCClient {
     })
   }
 
-  public freeSpace() {
-    return this.sendHTTP<number>({
-      method: 'Service.FreeSpace',
-      params: [],
-    })
-  }
-
   public directoryTree() {
     return this.sendHTTP<string[]>({
       method: 'Service.DirectoryTree',

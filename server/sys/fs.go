@@ -6,17 +6,9 @@ import (
 
 	"github.com/marcopiovanello/yt-dlp-web-ui/v3/server/config"
 	"github.com/marcopiovanello/yt-dlp-web-ui/v3/server/internal"
-	"golang.org/x/sys/unix"
 )
 
 // package containing fs related operation (unix only)
-
-// FreeSpace gets the available Bytes writable to download directory
-func FreeSpace() (uint64, error) {
-	var stat unix.Statfs_t
-	unix.Statfs(config.Instance().DownloadPath, &stat)
-	return (stat.Bavail * uint64(stat.Bsize)), nil
-}
 
 // Build a directory tree started from the specified path using DFS.
 // Then return the flattened tree represented as a list.
