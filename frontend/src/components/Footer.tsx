@@ -7,7 +7,6 @@ import { connectedState } from '../atoms/status'
 import { totalDownloadSpeedState } from '../atoms/ui'
 import { useI18n } from '../hooks/useI18n'
 import { formatSpeedMiB } from '../utils'
-import FreeSpaceIndicator from './FreeSpaceIndicator'
 import VersionIndicator from './VersionIndicator'
 import { useAtomValue } from 'jotai'
 
@@ -55,10 +54,6 @@ const Footer: React.FC = () => {
               {isConnected ? settings.serverAddr : i18n.t('notConnectedText')}
             </span>
           </div>
-          <Divider orientation="vertical" flexItem />
-          <Suspense fallback={i18n.t('loadingLabel')}>
-            <FreeSpaceIndicator />
-          </Suspense>
         </div>
       </Toolbar>
     </AppBar>

@@ -225,17 +225,6 @@ func (s *Service) ClearCompleted(cleared *string) error {
 	return nil
 }
 
-// FreeSpace gets the available from package sys util
-func (s *Service) FreeSpace(args NoArgs, free *uint64) error {
-	freeSpace, err := sys.FreeSpace()
-	if err != nil {
-		return err
-	}
-
-	*free = freeSpace
-	return err
-}
-
 // Return a flattned tree of the download directory
 func (s *Service) DirectoryTree(args NoArgs, tree *[]string) error {
 	dfsTree, err := sys.DirectoryTree()
